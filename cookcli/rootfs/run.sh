@@ -10,12 +10,12 @@ app_port=$(bashio::app.port)
 app_port=${app_port:-8099}
 url_prefix="$(bashio::app.ingress_url)"
 
-recipes_dir="/app_configs/${app_hostname}/recipes"
+recipes_dir="/app_configs/${app_slug}/recipes"
 pantry_conf="${recipes_dir}/config/pantry.conf"
 
 mkdir -p "$(dirname pantry_conf)"
 if [ ! -f "${pantry_conf}" ]; then
-    touch "${pantry_conf}"
+    echo > "${pantry_conf}"
 fi
 
 config=$(bashio::var.json \
