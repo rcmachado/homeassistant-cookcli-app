@@ -22,6 +22,8 @@ config=$(bashio::var.json \
   hostname "http://${app_hostname}:${app_port}" \
 )
 
+bashio::discovery "${app_hostname}" "${config}"
+
 if bashio::discovery "${app_hostname}" "${config}" > /dev/null; then
   bashio::log.info "Sent discovery information to Home Assistant"
 else
