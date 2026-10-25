@@ -6,7 +6,8 @@ fi
 
 app_slug="$(bashio::app.slug)"
 app_hostname="$(bashio::app.hostname)"
-app_port="$(bashio::app.port)"
+app_port=$(bashio::app.port)
+app_port=${app_port:-8099}
 url_prefix="$(bashio::app.ingress_url)"
 
 recipes_dir="/app_configs/${app_slug}/recipes"
