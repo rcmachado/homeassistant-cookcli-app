@@ -13,7 +13,7 @@ url_prefix="$(bashio::app.ingress_url)"
 recipes_dir="/app_configs/${app_slug}/recipes"
 pantry_conf="${recipes_dir}/config/pantry.conf"
 
-mkdir -p "$(dirname pantry_conf)"
+mkdir -p "$(dirname $pantry_conf)"
 if [ ! -f "${pantry_conf}" ]; then
     echo > "${pantry_conf}"
 fi
