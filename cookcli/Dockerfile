@@ -8,7 +8,3 @@ ARG BUILD_VERSION
 
 COPY rootfs /
 COPY --from=ghcr.io/lemyst/cookcli:pr-773 /usr/local/bin/cook /
-
-RUN chmod a+x /run.sh
-
-CMD ["/run.sh"]

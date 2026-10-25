@@ -1,0 +1,19 @@
+#!/command/with-contenv bashio
+if bashio::config.has_value 'log_level'; then
+  bashio::log.level "$(bashio::config 'log_level')"
+fi
+
+bashio::log.info "Initializing cookcli"
+
+app_slug="$(bashio::app.slug)"
+
+recipes_dir="/app_configs/${app_slug}/recipes"
+pantry_conf="${recipes_dir}/config/pantry.conf"
+
+if ! bashio::fs.directory_exists "${recipes_dir}/config"; then
+    mkdir -p "${recipes_dir}/config"
+fi
+
+if ! bashio::fs.file_exists "${pantry_conf}"; then
+    echo > "${pantry_conf}"
+fi
