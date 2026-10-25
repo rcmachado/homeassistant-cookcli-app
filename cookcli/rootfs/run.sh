@@ -10,15 +10,19 @@ app_port=$(bashio::app.port)
 app_port=${app_port:-8099}
 url_prefix="$(bashio::app.ingress_url)"
 
-recipes_dir="/app_configs/${app_slug}/recipes"
+recipes_dir="/app_configs/${app_hostname}/recipes"
+pantry_conf="${recipes_dir}/config/pantry.conf"
 
-mkdir -p "${recipes_dir}/config"
+mkdir -p "$(dirname pantry_conf)"
+if [ ! -f "${pantry_conf}" ]; then
+    touch "${pantry_conf}"
+fi
 
 config=$(bashio::var.json \
-  host "${app_hostname}" \
-  port "^${app_port}")
+  hostname "http://${app_hostname}:${app_port}" \
+)
 
-if bashio::discovery "${app_slug}" "${config}" > /dev/null; then
+if bashio::discovery "${app_hostname}" "${config}" > /dev/null; then
   bashio::log.info "Sent discovery information to Home Assistant"
 else
   bashio::log.error "Discovery message to Home Assistant failed!"
