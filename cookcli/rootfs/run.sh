@@ -22,13 +22,8 @@ config=$(bashio::var.json \
   hostname "http://${app_hostname}:${app_port}" \
 )
 
-bashio::discovery "${app_hostname}" "${config}"
-
-if bashio::discovery "${app_hostname}" "${config}" > /dev/null; then
-  bashio::log.info "Sent discovery information to Home Assistant"
-else
-  bashio::log.error "Discovery message to Home Assistant failed!"
-fi
+bashio::log.info "Sent discovery information to Home Assistant"
+bashio::discovery "${app_slug}" "${config}"
 
 bashio::log.info "Starting cook server on port ${app_port}"
 exec /cook server "${recipes_dir}" --host --port ${app_port} \
