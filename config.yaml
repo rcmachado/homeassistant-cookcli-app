@@ -1,0 +1,22 @@
+name: "CookCLI"
+description: "A Home Assistant app for CookCLI — the command-line tool for managing Cooklang recipes."
+version: "dev"
+slug: "cookcli"
+init: false
+arch:
+  - aarch64
+  - amd64
+discovery:
+  - cookcli
+ingress: true
+watchdog: "http://[HOST]:[PORT:8099]/api/stats"
+panel_title: Cook
+panel_icon: mdi:chef-hat
+panel_admin: false
+map:
+  - type: all_app_configs
+    read_only: false
+options:
+  log_level: info
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
