@@ -18,5 +18,7 @@ map:
     read_only: false
 options:
   log_level: info
+  cors_origin: ''
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
+  cors_origin: url
